@@ -4,9 +4,9 @@ import exercises from "../store/exercises";
 import {Button, Grid} from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import styled from "styled-components";
+import mainImage from '../assets/startImage.png'
 
-const MainImage = styled.div`
-  background-image: url('../assets/startImage.png');
+const MainImage = styled.img`
   width: 100%;
 `
 
@@ -25,7 +25,7 @@ const MainPage = observer( () => {
           </Button>
         </Grid>
         <Grid item alignSelf={'flex-start'}>
-          <MainImage/>
+          <MainImage src={mainImage} alt={'main'}/>
         </Grid>
       </Grid>
     </Grid>
