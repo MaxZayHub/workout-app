@@ -8,6 +8,7 @@ import mainImage from '../assets/startImage.png'
 import MainTitle from './MainTitle'
 import QuestionList from './QuestionList'
 import { nanoid } from 'nanoid'
+import { WorkoutButton } from '../styledComponents/StartWorkoutButton'
 
 const MainImage = styled.img`
   width: 100%;
@@ -39,35 +40,6 @@ const ContentWrapper = styled.div`
   @media (max-width: 375px) {
     width: 90%;
     padding: 16px;
-  }
-`
-
-const StartWorkoutButton = styled.button`
-  width: 55%;
-  background-color: #aa00ff;
-  height: 56px;
-  border: none;
-  outline: none;
-  border-radius: 10px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: Source Sans Pro, sans-serif;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  z-index: 2;
-
-  @media (max-width: 375px) {
-    width: 90%;
-    position: fixed;
-    bottom: 20px;
-    right: auto;
-    left: auto;
-    -webkit-box-shadow: 0 0 43px 5px rgba(34, 60, 80, 0.9);
-    -moz-box-shadow: 0 0 43px 5px rgba(34, 60, 80, 0.9);
-    box-shadow: 0 0 43px 5px rgba(34, 60, 80, 0.9);
   }
 `
 
@@ -108,7 +80,7 @@ const MainPage = observer(() => {
             exercises={item.exercises}
           />
         ))}
-        <StartWorkoutButton>Start Workout</StartWorkoutButton>
+        <WorkoutButton>Start Workout</WorkoutButton>
       </ContentWrapper>
     </Grid>
   )
