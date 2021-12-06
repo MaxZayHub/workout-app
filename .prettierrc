@@ -4,5 +4,6 @@
   "tabWidth": 2,
   "singleQuote": true,
   "parser": "flow",
-  "semi": false
+  "semi": false,
+  "jsxBracketSameLine": false
 }

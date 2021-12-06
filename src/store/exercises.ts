@@ -19,6 +19,7 @@ class Exercises {
       .then(res => res.json())
       .then(json => {
         this.exercises = json.data as Data
+        console.log(json.data)
       })
   }
 
