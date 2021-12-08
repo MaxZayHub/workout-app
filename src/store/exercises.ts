@@ -1,5 +1,6 @@
 import {makeAutoObservable, toJS} from "mobx";
 import {Question} from "../types/question";
+import { Exercise } from '../types/exercise'
 
 interface Data {
   name: string,
@@ -8,6 +9,8 @@ interface Data {
 }
 
 class Exercises {
+  private currentIndex = 0
+  private allExercises : Exercise[] = []
   private exercises: Data = {name: '', slug: '', questions: []}
 
   constructor() {
@@ -19,7 +22,7 @@ class Exercises {
       .then(res => res.json())
       .then(json => {
         this.exercises = json.data as Data
-        console.log(json.data)
+        this.calculateId()
       })
   }
 
@@ -31,6 +34,39 @@ class Exercises {
     return this.exercises.questions.length === 0
   }
 
+  private calculateId() {
+    this.allExercises = this.exercises.questions.reduce((acc: Exercise[], item) => acc.concat(item.exercises), [])
+  }
+
+  prevCurrentIndex() {
+    if (this.currentIndex === 0) {
+      return 0
+    } else {
+      this.currentIndex -= 1
+      return  toJS(this.currentIndex)
+    }
+  }
+
+  nextCurrentIndex() {
+    this.currentIndex += 1
+    return toJS(this.currentIndex)
+  }
+
+  getCurrentElement() {
+    return toJS(this.allExercises[this.currentIndex])
+  }
+
+  getElementById(id: number) {
+    return toJS(this.allExercises.find((item) => item.id === id));
+  }
+
+  getAllExercise() {
+    return toJS(this.allExercises)
+  }
+
+  getCurrentIndex() {
+    return this.currentIndex
+  }
 }
 
 export default new Exercises()

@@ -1,7 +1,7 @@
 import { COMPLETE_ROUTE, EXERCISE_ROUTE, MAIN_ROUTE } from './consts'
 import MainPage from '../components/MainPage'
 import WorkoutCompletedPage from '../components/WorkoutCompletedPage'
-import ExerciseGetReadyPage from '../components/ExerciseGetReadyPage'
+import ExercisePage from '../components/ExercisePage'
 
 export const routes = [
   {
@@ -16,6 +16,6 @@ export const routes = [
 
   {
     path: EXERCISE_ROUTE,
-    Component: ExerciseGetReadyPage
+    Component: ExercisePage
   }
 ]

@@ -9,6 +9,7 @@ import MainTitle from './MainTitle'
 import QuestionList from './QuestionList'
 import { nanoid } from 'nanoid'
 import { WorkoutButton } from '../styledComponents/StartWorkoutButton'
+import { useHistory } from 'react-router'
 
 const MainImage = styled.img`
   width: 100%;
@@ -48,6 +49,12 @@ const MainPage = observer(() => {
     exercises.fetchExercises()
   }, [])
 
+  const history = useHistory()
+
+  const startWorkoutClickButton = () => {
+    history.push(`/exercise/:${exercises.getCurrentElement().id}`)
+  }
+
   return (
     <Grid
       container
@@ -80,7 +87,7 @@ const MainPage = observer(() => {
             exercises={item.exercises}
           />
         )) : <h2>...Loading...</h2>}
-        <WorkoutButton>Start Workout</WorkoutButton>
+        <WorkoutButton onClick={startWorkoutClickButton}>Start Workout</WorkoutButton>
       </ContentWrapper>
     </Grid>
   )
