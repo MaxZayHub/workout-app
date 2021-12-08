@@ -18,7 +18,9 @@ const ExercisePage = () => {
 
   return (
     <>
-      {warmupTimerIsOver ? <ExerciseContent setId={setCurrentId} currentExercise={currentExercise} /> : <ExerciseGetReadyPage currentExercise={currentExercise} setWarmupTimerIsOver={setWarmupTimerIsOver} />}
+      {warmupTimerIsOver ?
+        <ExerciseContent setId={setCurrentId} currentExercise={currentExercise} /> :
+        <ExerciseGetReadyPage currentExercise={currentExercise} setWarmupTimerIsOver={setWarmupTimerIsOver} />}
     </>
   )
 }

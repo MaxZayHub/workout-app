@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FlexWrapper } from '../styledComponents/FlexWrapper'
 import { Button, Grid, Typography } from '@mui/material'
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
@@ -10,14 +10,28 @@ import { VideoStyled } from '../styledComponents/VideoStyled'
 import { Exercise } from '../types/exercise'
 import { useHistory } from 'react-router'
 import exercises from '../store/exercises'
+import PauseIcon from '@mui/icons-material/Pause';
+import styled from 'styled-components'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 interface Props {
   currentExercise: Exercise | undefined
   setId: (id: number) => void
 }
 
+const PauseButton = styled.button`
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #aa00ff;
+`
+
 const ExerciseContent = (props: Props) => {
   const history = useHistory()
+  const [pause, setPause] = useState<boolean>(false)
 
   const changeNextExerciseHandler = () => {
     if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length) {
@@ -27,6 +41,10 @@ const ExerciseContent = (props: Props) => {
     } else {
       history.push('/complete')
     }
+  }
+
+  const clickPauseButtonHandler = () => {
+    setPause(!pause)
   }
 
   const changePrevExerciseHandler = () => {
@@ -50,7 +68,7 @@ const ExerciseContent = (props: Props) => {
             <Button onClick={changePrevExerciseHandler} variant={'outlined'} color="secondary" style={{border: '2px solid'}}>
               <SkipPreviousIcon />
             </Button>
-            <CountdownCircleTimer isPlaying duration={props.currentExercise.duration} colors={[['#ff4081', 1]]} onComplete={changeNextExerciseHandler} size={128} >
+            <CountdownCircleTimer isPlaying={!pause} duration={props.currentExercise.duration} colors={[['#ff4081', 1]]} onComplete={changeNextExerciseHandler} size={128} >
               {({remainingTime}) => <TimerNumber>{isRemainingTimeLessThanTen(remainingTime) ? '0'+remainingTime : remainingTime}</TimerNumber> }
             </CountdownCircleTimer>
             <Button onClick={changeNextExerciseHandler}  variant={'outlined'} color="secondary" style={{border: '2px solid'}}>
@@ -58,12 +76,18 @@ const ExerciseContent = (props: Props) => {
             </Button>
           </Grid>
         </Grid>
-        <Grid item width={'100%'}>
+        <Grid item width={'100%'} position={'relative'}>
           <VideoStyled autoPlay={true} muted={true} loop={true}>
             <source src={props.currentExercise?.video}/>
           </VideoStyled>
+          <h1 style={{position: 'absolute', top: '0px'}} >test</h1>
         </Grid>
       </FlexWrapper>}
+      <Grid container onClick={clickPauseButtonHandler} alignItems={'center'} justifyContent={'center'} position={'absolute'} bottom={'0px'} borderTop={'8px solid #eeeeee'} width={'100%'} height={'80px'}>
+          <PauseButton>
+            {pause ? <PlayArrowIcon style={{color: 'white'}} /> :  <PauseIcon style={{color: 'white'}}/>}
+          </PauseButton>
+      </Grid>
     </Grid>
   )
 }
