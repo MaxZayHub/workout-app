@@ -19,7 +19,7 @@ const VideoStyled = styled.video`
 
 
 const ExerciseGetReadyPage = (props: Props) => {
-  const timerCompleteHandler = () => {
+  const skipWarmupHandler = () => {
     props.setWarmupTimerIsOver(true)
   }
 
@@ -30,10 +30,10 @@ const ExerciseGetReadyPage = (props: Props) => {
         <Typography variant={'h3'} fontSize={'24px'} fontWeight={'600'} fontFamily={'Source Sans Pro'}>Get Ready</Typography>
         <Grid container justifyContent={'end'}>
           <Grid container width={'48%'} justifyContent={'space-between'} alignItems={'center'} marginRight={'82px'}>
-            <CountdownCircleTimer isPlaying duration={5} colors={[['#1de9b6', 1]]} onComplete={timerCompleteHandler} size={128} >
+            <CountdownCircleTimer isPlaying duration={5} colors={[['#1de9b6', 1]]} onComplete={skipWarmupHandler} size={128} >
               {({remainingTime}) => <TimerNumber>{isRemainingTimeLessThanTen(remainingTime) ? '0'+remainingTime : remainingTime}</TimerNumber> }
             </CountdownCircleTimer>
-            <Button variant={'outlined'} color="secondary" style={{border: '2px solid'}}>
+            <Button onClick={skipWarmupHandler} variant={'outlined'} color="secondary" style={{border: '2px solid'}}>
               <SkipNextIcon />
             </Button>
           </Grid>
