@@ -14,7 +14,6 @@ const VideoStyled = styled.video`
 
 const ExerciseGetReadyPage = () => {
   const timerCompleteHandler = () => {
-    console.log('test')
   }
 
 

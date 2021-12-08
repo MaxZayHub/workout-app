@@ -27,6 +27,10 @@ class Exercises {
     return toJS(this.exercises)
   }
 
+  isEmpty() {
+    return this.exercises.questions.length === 0
+  }
+
 }
 
 export default new Exercises()

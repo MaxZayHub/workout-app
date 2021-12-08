@@ -72,14 +72,14 @@ const MainPage = observer(() => {
         <Grid item alignSelf={'flex-start'}>
           <MainTitle />
         </Grid>
-        {exercises.getExercises().questions.map((item) => (
+        {!exercises.isEmpty() ? exercises.getExercises().questions.map((item) => (
           <QuestionList
             title={item.title}
             key={nanoid()}
             muscleGroup={item.muscleGroup}
             exercises={item.exercises}
           />
-        ))}
+        )) : <h2>...Loading...</h2>}
         <WorkoutButton>Start Workout</WorkoutButton>
       </ContentWrapper>
     </Grid>

@@ -1,10 +1,8 @@
-import React from 'react';
+import React from 'react'
 import './App.css';
-import MainPage from "./components/MainPage";
-import ExerciseGetReadyPage from "./components/ExerciseGetReadyPage";
 import styled from 'styled-components'
-import ExercisePage from './components/ExercisePage'
-import WorkoutCompletedPage from './components/WorkoutCompletedPage'
+import AppRouter from './components/AppRouter'
+import { BrowserRouter } from 'react-router-dom'
 
 const StyledApp = styled.div`
   width: 100%;
@@ -13,9 +11,11 @@ const StyledApp = styled.div`
 
 function App() {
   return (
-    <StyledApp>
-      <WorkoutCompletedPage/>
-    </StyledApp>
+    <BrowserRouter>
+      <StyledApp>
+        <AppRouter />
+      </StyledApp>
+    </BrowserRouter>
   );
 }
 
