@@ -10,6 +10,7 @@ const ExerciseCard = (props: Exercise) => {
       justifyContent={'start'}
       gap={'8px'}
       flexDirection={'row'}
+      bgcolor={props.completed ? '#b1fdc8' : 'transparent'}
     >
       <img src={props.photo} width={64} height={64} alt={'exercise'} />
       <Grid

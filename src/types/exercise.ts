@@ -4,5 +4,6 @@ export interface Exercise {
   id: number,
   photo: string,
   title: string,
-  video: string
+  video: string,
+  completed: boolean
 }

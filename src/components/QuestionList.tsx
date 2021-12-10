@@ -39,6 +39,7 @@ const QuestionList = (props: Question) => {
             photo={item.photo}
             title={item.title}
             video={item.video}
+            completed={item.completed}
           />
         ))}
       </Grid>

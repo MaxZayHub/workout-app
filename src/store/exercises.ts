@@ -12,9 +12,19 @@ class Exercises {
   private currentIndex = 0
   private allExercises : Exercise[] = []
   private exercises: Data = {name: '', slug: '', questions: []}
+  private currentExerciseSession : {duration: number, paused: boolean } = {duration: 0, paused: false}
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  getCurrentExerciseSession() {
+    return toJS(this.currentExerciseSession)
+  }
+
+  setCurrentExerciseSession(duration: number, paused: boolean) {
+    this.currentExerciseSession.duration = duration
+    this.currentExerciseSession.paused = paused
   }
 
   fetchExercises() {
@@ -35,7 +45,7 @@ class Exercises {
   }
 
   private calculateId() {
-    this.allExercises = this.exercises.questions.reduce((acc: Exercise[], item) => acc.concat(item.exercises), [])
+    this.allExercises = this.exercises.questions.reduce((acc: Exercise[], item) => acc.concat(item.exercises.map((elem) => Object.assign(elem, {completed: false}))), [])
   }
 
   prevCurrentIndex() {
@@ -66,6 +76,10 @@ class Exercises {
 
   getCurrentIndex() {
     return this.currentIndex
+  }
+
+  setStatusForCurrentElement(status: boolean) {
+    this.allExercises[this.currentIndex].completed = status
   }
 }
 

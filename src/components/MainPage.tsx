@@ -46,7 +46,9 @@ const ContentWrapper = styled.div`
 
 const MainPage = observer(() => {
   useEffect(() => {
-    exercises.fetchExercises()
+    if (exercises.getAllExercise().length === 0) {
+      exercises.fetchExercises()
+    }
   }, [])
 
   const history = useHistory()

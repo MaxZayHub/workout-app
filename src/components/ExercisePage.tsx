@@ -16,6 +16,12 @@ const ExercisePage = () => {
     setCurrentExercise(exercises.getElementById(currentId))
   }, [currentId])
 
+  useEffect(() => {
+    if (exercises.getCurrentExerciseSession().paused) {
+      setWarmupTimerIsOver(true)
+    }
+  }, [])
+
   return (
     <>
       {warmupTimerIsOver ?

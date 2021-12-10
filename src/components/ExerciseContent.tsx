@@ -29,14 +29,49 @@ const PauseButton = styled.button`
   background-color: #aa00ff;
 `
 
+const PausedBlock = styled.div`
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:rgba(0,0,0,.6);
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 10px;
+  user-select: none;
+  
+`
+
+const LeaveWorkoutButton = styled.div`
+  width: 256px;
+  height: 48px;
+  outline: none;
+  margin-top: 26px;
+  background-color: transparent;
+  border-radius: 10px;
+  color: #eeeeee;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`
+
 const ExerciseContent = (props: Props) => {
   const history = useHistory()
-  const [pause, setPause] = useState<boolean>(false)
+  const [pause, setPause] = useState<boolean>(exercises.getCurrentExerciseSession().paused)
+  let duration : number | undefined = 0
+  const currentExerciseSession = exercises.getCurrentExerciseSession()
 
   const changeNextExerciseHandler = () => {
-    if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length) {
+    if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length && duration) {
+      exercises.setStatusForCurrentElement(true)
       exercises.nextCurrentIndex()
       history.push(`/exercise/:${exercises.getCurrentElement().id}`)
+      exercises.setCurrentExerciseSession(duration, false)
       props.setId(exercises.getCurrentElement().id)
     } else {
       history.push('/complete')
@@ -49,14 +84,26 @@ const ExerciseContent = (props: Props) => {
 
   const changePrevExerciseHandler = () => {
     if (exercises.getCurrentIndex() !== 0) {
-      if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length) {
+      if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length && duration) {
         exercises.prevCurrentIndex()
         history.push(`/exercise/:${exercises.getCurrentElement().id}`)
+        exercises.setCurrentExerciseSession(duration, false)
         props.setId(exercises.getCurrentElement().id)
       } else {
         history.push('/complete')
       }
     }
+  }
+
+  const leaveWorkoutClickButtonHandler = () => {
+    if (duration) {
+      exercises.setCurrentExerciseSession(duration, true)
+    }
+    history.push('/main')
+  }
+
+  const renderTime = (remainingTime: number | undefined ) => {
+    return  <TimerNumber>{isRemainingTimeLessThanTen(remainingTime) ? '0'+remainingTime : remainingTime}</TimerNumber>
   }
 
   return (
@@ -68,19 +115,27 @@ const ExerciseContent = (props: Props) => {
             <Button onClick={changePrevExerciseHandler} variant={'outlined'} color="secondary" style={{border: '2px solid'}}>
               <SkipPreviousIcon />
             </Button>
-            <CountdownCircleTimer isPlaying={!pause} duration={props.currentExercise.duration} colors={[['#ff4081', 1]]} onComplete={changeNextExerciseHandler} size={128} >
-              {({remainingTime}) => <TimerNumber>{isRemainingTimeLessThanTen(remainingTime) ? '0'+remainingTime : remainingTime}</TimerNumber> }
+            <CountdownCircleTimer isPlaying={!pause} initialRemainingTime={currentExerciseSession.paused ? currentExerciseSession.duration : props.currentExercise.duration} duration={props.currentExercise.duration} colors={[['#ff4081', 1]]} onComplete={changeNextExerciseHandler} size={128} >
+              {({remainingTime}) => {
+                duration = remainingTime
+                return renderTime(remainingTime)
+              }}
             </CountdownCircleTimer>
             <Button onClick={changeNextExerciseHandler}  variant={'outlined'} color="secondary" style={{border: '2px solid'}}>
               <SkipNextIcon />
             </Button>
           </Grid>
         </Grid>
-        <Grid item width={'100%'} position={'relative'}>
-          <VideoStyled autoPlay={true} muted={true} loop={true}>
+        <Grid item width={'100%'} position={'relative'} borderRadius={'10px'}>
+          <VideoStyled autoPlay={true} muted={true} loop={true} style={{borderRadius: '10px'}}>
             <source src={props.currentExercise?.video}/>
           </VideoStyled>
-          <h1 style={{position: 'absolute', top: '0px'}} >test</h1>
+          {pause &&
+            <PausedBlock>
+              <Typography variant={'h3'} fontFamily={'Source Sans Pro'} color={'white'} fontSize={'24px'}>Workout paused</Typography>
+              <Typography variant={'h3'} fontFamily={'Source Sans Pro'} color={'white'} fontSize={'16px'}>Press "Play button" or "Space bar" to continue</Typography>
+              <LeaveWorkoutButton onClick={leaveWorkoutClickButtonHandler}><Typography variant={'h4'} fontFamily={'Source Sans Pro'} fontSize={'24px'}>Leave workout</Typography></LeaveWorkoutButton>
+            </PausedBlock>}
         </Grid>
       </FlexWrapper>}
       <Grid container onClick={clickPauseButtonHandler} alignItems={'center'} justifyContent={'center'} position={'absolute'} bottom={'0px'} borderTop={'8px solid #eeeeee'} width={'100%'} height={'80px'}>
