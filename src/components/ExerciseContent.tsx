@@ -67,11 +67,10 @@ const ExerciseContent = (props: Props) => {
   const currentExerciseSession = exercises.getCurrentExerciseSession()
 
   const changeNextExerciseHandler = () => {
-    if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length && duration) {
+    if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length) {
       exercises.setStatusForCurrentElement(true)
       exercises.nextCurrentIndex()
       history.push(`/exercise/:${exercises.getCurrentElement().id}`)
-      exercises.setCurrentExerciseSession(duration, false)
       props.setId(exercises.getCurrentElement().id)
     } else {
       history.push('/complete')
@@ -99,6 +98,7 @@ const ExerciseContent = (props: Props) => {
     if (duration) {
       exercises.setCurrentExerciseSession(duration, true)
     }
+    exercises.stopTimer()
     history.push('/main')
   }
 
@@ -106,8 +106,14 @@ const ExerciseContent = (props: Props) => {
     return  <TimerNumber>{isRemainingTimeLessThanTen(remainingTime) ? '0'+remainingTime : remainingTime}</TimerNumber>
   }
 
+  const onSpaceClickHandler = (event : React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.code === 'Space') {
+      setPause(!pause)
+    }
+  }
+
   return (
-    <Grid container width={'100%'} minHeight={'100vh'} justifyContent={'start'} alignItems={'center'} flexDirection={'column'} gap={'32px'}>
+    <Grid container onKeyUp={onSpaceClickHandler} tabIndex={0} width={'100%'} minHeight={'100vh'} justifyContent={'start'} alignItems={'center'} flexDirection={'column'} gap={'32px'}>
       {props.currentExercise && <FlexWrapper>
         <Typography variant={'h3'} fontSize={'24px'} fontWeight={'600'} fontFamily={'Source Sans Pro'}>{props.currentExercise?.title}</Typography>
         <Grid container justifyContent={'space-between'}>
@@ -138,8 +144,8 @@ const ExerciseContent = (props: Props) => {
             </PausedBlock>}
         </Grid>
       </FlexWrapper>}
-      <Grid container onClick={clickPauseButtonHandler} alignItems={'center'} justifyContent={'center'} position={'absolute'} bottom={'0px'} borderTop={'8px solid #eeeeee'} width={'100%'} height={'80px'}>
-          <PauseButton>
+      <Grid container alignItems={'center'} justifyContent={'center'} position={'absolute'} bottom={'0px'} borderTop={'8px solid #eeeeee'} width={'100%'} height={'80px'}>
+          <PauseButton onClick={clickPauseButtonHandler}>
             {pause ? <PlayArrowIcon style={{color: 'white'}} /> :  <PauseIcon style={{color: 'white'}}/>}
           </PauseButton>
       </Grid>

@@ -13,9 +13,34 @@ class Exercises {
   private allExercises : Exercise[] = []
   private exercises: Data = {name: '', slug: '', questions: []}
   private currentExerciseSession : {duration: number, paused: boolean } = {duration: 0, paused: false}
+  private workoutTime : number = 0
+  private timer : NodeJS.Timeout | null = null
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  startTimer() {
+    this.timer = setInterval(() => {
+      this.workoutTime += 1
+    }, 1000)
+  }
+
+  stopTimer() {
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
+  }
+
+  clearTimer() {
+    if (this.timer) {
+      clearInterval(this.timer)
+      this.workoutTime = 0
+    }
+  }
+
+  getWorkOutTime() {
+    return this.workoutTime
   }
 
   getCurrentExerciseSession() {
@@ -42,6 +67,10 @@ class Exercises {
 
   isEmpty() {
     return this.exercises.questions.length === 0
+  }
+
+  getMaxWorkoutTime() {
+    return Math.floor(this.allExercises.reduce((sum, elem) => sum += elem.duration + 5 , 0) / 60)
   }
 
   private calculateId() {
@@ -76,6 +105,10 @@ class Exercises {
 
   getCurrentIndex() {
     return this.currentIndex
+  }
+
+  setCurrentIndex(number: number) {
+    this.currentIndex = number
   }
 
   setStatusForCurrentElement(status: boolean) {

@@ -54,6 +54,7 @@ const MainPage = observer(() => {
   const history = useHistory()
 
   const startWorkoutClickButton = () => {
+    exercises.startTimer()
     history.push(`/exercise/:${exercises.getCurrentElement().id}`)
   }
 
@@ -89,7 +90,7 @@ const MainPage = observer(() => {
             exercises={item.exercises}
           />
         )) : <h2>...Loading...</h2>}
-        <WorkoutButton onClick={startWorkoutClickButton}>Start Workout</WorkoutButton>
+        <WorkoutButton onClick={startWorkoutClickButton}>{exercises.getCurrentExerciseSession().paused ? 'Resume': 'Start Workout'}</WorkoutButton>
       </ContentWrapper>
     </Grid>
   )

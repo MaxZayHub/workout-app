@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
 import styled from 'styled-components'
+import exercises from '../store/exercises'
 
 const SaveContinueButton = styled.button`
   width: 100%;
@@ -19,6 +20,14 @@ const SaveContinueButton = styled.button`
 `
 
 const WorkoutCompletedPage = () => {
+  const [time, setTime] = useState<number>()
+
+  useEffect(() => {
+    exercises.stopTimer()
+    setTime(Math.floor(exercises.getWorkOutTime() / 60))
+    exercises.clearTimer()
+  },[])
+
   return (
     <Grid container width={'100%'} minHeight={'100vh'} alignItems={'center'} justifyContent={'start'} flexDirection={'column'} >
       <Grid container width={'55%'} alignItems={'center'} justifyContent={'start'} flexDirection={'column'} marginTop={'124px'}>
@@ -35,7 +44,7 @@ const WorkoutCompletedPage = () => {
           <Typography variant={'h5'} fontSize={'14px'} fontFamily={'Source Sans Pro'} color={'#212121'}>Minutes</Typography>
         </Grid>
         <Grid item  marginTop={'4px'}>
-          <Typography variant={'h4'} fontSize={'40px'} color={'#212121'} fontWeight={'600'} fontFamily={'Source Sans Pro'} >25</Typography>
+          <Typography variant={'h4'} fontSize={'40px'} color={'#212121'} fontWeight={'600'} fontFamily={'Source Sans Pro'} >{time}</Typography>
         </Grid>
         <Grid item width={'100%'} marginTop={'40px'}>
           <SaveContinueButton>Save & Continue</SaveContinueButton>
