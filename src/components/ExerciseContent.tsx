@@ -13,6 +13,7 @@ import exercises from '../store/exercises'
 import PauseIcon from '@mui/icons-material/Pause';
 import styled from 'styled-components'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { HeaderComponent } from '../styledComponents/HeaderComponent'
 
 interface Props {
   currentExercise: Exercise | undefined
@@ -118,7 +119,7 @@ const ExerciseContent = (props: Props) => {
   return (
     <Grid container onKeyUp={onSpaceClickHandler} tabIndex={0} width={'100%'} minHeight={'100vh'} justifyContent={'start'} alignItems={'center'} flexDirection={'column'} gap={'32px'}>
       {props.currentExercise && <FlexWrapper>
-        <Typography variant={'h3'} fontSize={'24px'} fontWeight={'600'} fontFamily={'Source Sans Pro'}>{props.currentExercise?.title}</Typography>
+        <HeaderComponent fontMedia={'20px'} fontWeight={'600'} fontSize={'24px'} fontFamily={'Source Sans Pro'}>Get Ready</HeaderComponent>
         <Grid container justifyContent={'space-between'}>
           <Grid container width={'100%'} justifyContent={'space-between'} alignItems={'center'}>
             <Button onClick={changePrevExerciseHandler} variant={'outlined'} color="secondary" style={{border: '2px solid'}}>

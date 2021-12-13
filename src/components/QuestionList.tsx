@@ -1,7 +1,8 @@
 import React from 'react'
 import { Question } from '../types/question'
-import { Divider, Grid, Typography } from '@mui/material'
+import { Divider, Grid } from '@mui/material'
 import ExerciseCard from './ExerciseCard'
+import { HeaderComponent } from '../styledComponents/HeaderComponent'
 
 const QuestionList = (props: Question) => {
   return (
@@ -13,15 +14,15 @@ const QuestionList = (props: Question) => {
       alignSelf={'flex-start'}
     >
       <Divider />
-      <Typography
-        variant={'h3'}
+      <HeaderComponent
+        fontMedia={'15px'}
+        textAlign={'left'}
+        fontWeight={'600'}
         fontSize={'16px'}
         fontFamily={'Source Sans Pro'}
-        fontWeight={'600'}
-        textAlign={'left'}
       >
         {props.title}
-      </Typography>
+      </HeaderComponent>
       <Grid
         container
         flexDirection={'column'}

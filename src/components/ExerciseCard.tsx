@@ -1,6 +1,7 @@
 import React from 'react'
 import { Exercise } from '../types/exercise'
 import { Grid, Typography } from '@mui/material'
+import { HeaderComponent } from '../styledComponents/HeaderComponent'
 
 const ExerciseCard = (props: Exercise) => {
   return (
@@ -20,14 +21,14 @@ const ExerciseCard = (props: Exercise) => {
         gap={'5px'}
         width={'auto'}
       >
-        <Typography
-          variant={'h4'}
+        <HeaderComponent
+          fontMedia={'18px'}
+          fontWeight={'600'}
           fontSize={'20px'}
           fontFamily={'Source Sans Pro'}
-          fontWeight={'600'}
         >
           {props.title}
-        </Typography>
+        </HeaderComponent>
         <Typography
           variant={'h5'}
           fontSize={'14px'}

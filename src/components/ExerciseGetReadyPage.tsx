@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Typography } from '@mui/material'
+import { Button, Grid } from '@mui/material'
 import {CountdownCircleTimer} from "react-countdown-circle-timer";
 import { TimerNumber } from '../styledComponents/TimerNumber'
 import styled from 'styled-components'
@@ -7,6 +7,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import { FlexWrapper } from '../styledComponents/FlexWrapper'
 import { isRemainingTimeLessThanTen } from '../utils/isRemainingTimeLessThanTen'
 import { Exercise } from '../types/exercise'
+import { HeaderComponent } from '../styledComponents/HeaderComponent'
 
 interface Props {
   setWarmupTimerIsOver: (warmupTimerIsOver: boolean) => void
@@ -39,7 +40,7 @@ const ExerciseGetReadyPage = (props: Props) => {
   return (
     <Grid container width={'100%'} minHeight={'100vh'} justifyContent={'start'} alignItems={'center'} flexDirection={'column'} gap={'32px'}>
       <FlexWrapper>
-        <Typography variant={'h3'} fontSize={'24px'} fontWeight={'600'} fontFamily={'Source Sans Pro'}>Get Ready</Typography>
+        <HeaderComponent fontMedia={'20px'} fontWeight={'600'} fontSize={'24px'} fontFamily={'Source Sans Pro'}>Get Ready</HeaderComponent>
         <Grid container justifyContent={'end'}>
           <TimerWrapper>
             <CountdownCircleTimer isPlaying duration={5} colors={[['#1de9b6', 1]]} onComplete={skipWarmupHandler} size={128} >
