@@ -78,6 +78,9 @@ const ExerciseContent = (props: Props) => {
   }
 
   const clickPauseButtonHandler = () => {
+    if (props.currentExercise) {
+      exercises.setCurrentExerciseSession(props.currentExercise.duration, false)
+    }
     setPause(!pause)
   }
 
