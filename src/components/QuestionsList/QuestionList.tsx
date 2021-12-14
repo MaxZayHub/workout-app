@@ -1,8 +1,8 @@
 import React from 'react'
-import { Question } from '../types/question'
+import { Question } from '../../types/question'
 import { Divider, Grid } from '@mui/material'
-import ExerciseCard from './ExerciseCard'
-import { HeaderComponent } from '../styledComponents/HeaderComponent'
+import ExerciseCard from '../ExerciseCard/ExerciseCard'
+import { HeaderComponent } from '../../common/HeaderComponent'
 
 const QuestionList = (props: Question) => {
   return (

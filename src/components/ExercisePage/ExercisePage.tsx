@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import ExerciseContent from './ExerciseContent'
-import ExerciseGetReadyPage from './ExerciseGetReadyPage'
-import exercises from '../store/exercises'
+import ExerciseContent from '../ExerciseContent/ExerciseContent'
+import ExerciseGetReadyPage from '../ExerciseGetReadyPage/ExerciseGetReadyPage'
+import exercises from '../../store/exercises'
 import { useParams } from 'react-router'
 
 const ExercisePage = () => {

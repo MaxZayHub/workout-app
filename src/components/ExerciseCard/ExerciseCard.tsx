@@ -1,7 +1,7 @@
 import React from 'react'
-import { Exercise } from '../types/exercise'
+import { Exercise } from '../../types/exercise'
 import { Grid, Typography } from '@mui/material'
-import { HeaderComponent } from '../styledComponents/HeaderComponent'
+import { HeaderComponent } from '../../common/HeaderComponent'
 
 const ExerciseCard = (props: Exercise) => {
   return (

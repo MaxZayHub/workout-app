@@ -1,13 +1,8 @@
 import React from 'react'
-import './App.css';
-import styled from 'styled-components'
-import AppRouter from './components/AppRouter'
+import '../../App.css'
+import AppRouter from '../AppRouter/AppRouter'
 import { BrowserRouter } from 'react-router-dom'
-
-const StyledApp = styled.div`
-  width: 100%;
-  min-height: 100vh;
-`
+import { StyledApp } from './App.styles'
 
 function App() {
   return (
@@ -16,7 +11,7 @@ function App() {
         <AppRouter />
       </StyledApp>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
