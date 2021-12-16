@@ -6,30 +6,33 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { TimerNumber } from '../../common/TimerNumber'
 import { isRemainingTimeLessThanTen } from '../../utils/isRemainingTimeLessThanTen'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
-// import { VideoStyled } from '../../common/VideoStyled'
 import { useHistory } from 'react-router'
-import exercises from '../../store/exercises'
 import PauseIcon from '@mui/icons-material/Pause'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import { HeaderComponent } from '../../common/HeaderComponent'
 import { ExerciseContentPropsInterface } from './ExerciseContent.interface'
 import { Style } from './ExerciseContent.styles'
 import { VideoStyled } from '../../common/VideoStyled'
+import { stores } from '../../store/store'
 
 const ExerciseContent = (props: ExerciseContentPropsInterface) => {
   const history = useHistory()
   const [pause, setPause] = useState<boolean>(
-    exercises.getCurrentExerciseSession().paused
+    stores.exerciseSession.getCurrentExerciseSession().paused
   )
   let duration: number | undefined = 0
-  const currentExerciseSession = exercises.getCurrentExerciseSession()
+  const currentExerciseSession =
+    stores.exerciseSession.getCurrentExerciseSession()
 
   const changeNextExerciseHandler = () => {
-    if (exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length) {
-      exercises.setStatusForCurrentElement(true)
-      exercises.nextCurrentIndex()
-      history.push(`/exercise/:${exercises.getCurrentElement().id}`)
-      props.setId(exercises.getCurrentElement().id)
+    if (
+      stores.exercises.getCurrentIndex() + 1 <
+      stores.exercises.getAllExercise().length
+    ) {
+      stores.exercises.setStatusForCurrentElement(true)
+      stores.exercises.nextCurrentIndex()
+      history.push(`/exercise/:${stores.exercises.getCurrentElement().id}`)
+      props.setId(stores.exercises.getCurrentElement().id)
     } else {
       history.push('/complete')
     }
@@ -37,21 +40,25 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
 
   const clickPauseButtonHandler = () => {
     if (props.currentExercise) {
-      exercises.setCurrentExerciseSession(props.currentExercise.duration, false)
+      stores.exerciseSession.setCurrentExerciseSession(
+        props.currentExercise.duration,
+        false
+      )
     }
     setPause(!pause)
   }
 
   const changePrevExerciseHandler = () => {
-    if (exercises.getCurrentIndex() !== 0) {
+    if (stores.exercises.getCurrentIndex() !== 0) {
       if (
-        exercises.getCurrentIndex() + 1 < exercises.getAllExercise().length &&
+        stores.exercises.getCurrentIndex() + 1 <
+          stores.exercises.getAllExercise().length &&
         duration
       ) {
-        exercises.prevCurrentIndex()
-        history.push(`/exercise/:${exercises.getCurrentElement().id}`)
-        exercises.setCurrentExerciseSession(duration, false)
-        props.setId(exercises.getCurrentElement().id)
+        stores.exercises.prevCurrentIndex()
+        history.push(`/exercise/:${stores.exercises.getCurrentElement().id}`)
+        stores.exerciseSession.setCurrentExerciseSession(duration, false)
+        props.setId(stores.exercises.getCurrentElement().id)
       } else {
         history.push('/complete')
       }
@@ -60,9 +67,9 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
 
   const leaveWorkoutClickButtonHandler = () => {
     if (duration) {
-      exercises.setCurrentExerciseSession(duration, true)
+      stores.exerciseSession.setCurrentExerciseSession(duration, true)
     }
-    exercises.stopTimer()
+    stores.exerciseSession.stopTimer()
     history.push('/main')
   }
 

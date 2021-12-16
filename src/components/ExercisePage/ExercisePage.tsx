@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import ExerciseContent from '../ExerciseContent/ExerciseContent'
 import ExerciseGetReadyPage from '../ExerciseGetReadyPage/ExerciseGetReadyPage'
-import exercises from '../../store/exercises'
 import { useParams } from 'react-router'
+import { stores } from '../../store/store'
 
 const ExercisePage = () => {
   const [warmupTimerIsOver, setWarmupTimerIsOver] = useState<boolean>(false)
   const { id } = useParams<{ id: string }>()
   const [currentId, setCurrentId] = useState<number>(parseInt(id.slice(1), 10))
   const [currentExercise, setCurrentExercise] = useState(
-    exercises.getElementById(currentId)
+    stores.exercises.getElementById(currentId)
   )
 
   useEffect(() => {
     setWarmupTimerIsOver(false)
-    setCurrentExercise(exercises.getElementById(currentId))
+    setCurrentExercise(stores.exercises.getElementById(currentId))
   }, [currentId])
 
   useEffect(() => {
-    if (exercises.getCurrentExerciseSession().paused) {
+    if (stores.exerciseSession.getCurrentExerciseSession().paused) {
       setWarmupTimerIsOver(true)
     }
   }, [])

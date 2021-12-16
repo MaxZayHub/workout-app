@@ -1,56 +1,17 @@
 import {makeAutoObservable, toJS} from "mobx";
-import {Question} from "../types/question";
 import { Exercise } from '../types/exercise'
-
-interface Data {
-  name: string,
-  slug: string,
-  questions: Question[]
-}
+import { Data } from '../types/data'
 
 class Exercises {
   private currentIndex = 0
   private allExercises : Exercise[] = []
   private exercises: Data = {name: '', slug: '', questions: []}
-  private currentExerciseSession : {duration: number, paused: boolean } = {duration: 0, paused: false}
-  private workoutTime : number = 0
-  private timer : NodeJS.Timeout | null = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  startTimer() {
-    this.timer = setInterval(() => {
-      this.workoutTime += 1
-    }, 1000)
-  }
 
-  stopTimer() {
-    if (this.timer) {
-      clearInterval(this.timer)
-    }
-  }
-
-  clearTimer() {
-    if (this.timer) {
-      clearInterval(this.timer)
-      this.workoutTime = 0
-    }
-  }
-
-  getWorkOutTime() {
-    return this.workoutTime
-  }
-
-  getCurrentExerciseSession() {
-    return toJS(this.currentExerciseSession)
-  }
-
-  setCurrentExerciseSession(duration: number, paused: boolean) {
-    this.currentExerciseSession.duration = duration
-    this.currentExerciseSession.paused = paused
-  }
 
   fetchExercises() {
     fetch('https://rnd.kilohealthservices.com/api/quizzes/workouts?api_token=4bfcebd0-0216-4572-bdb7-939e9600b9b2')
@@ -70,7 +31,7 @@ class Exercises {
   }
 
   getMaxWorkoutTime() {
-    return Math.floor(this.allExercises.reduce((sum, elem) => sum += elem.duration + 5 , 0) / 60)
+    return Math.floor(this.allExercises.reduce((sum, elem) => sum + elem.duration + 5 , 0) / 60)
   }
 
   private calculateId() {
@@ -116,4 +77,4 @@ class Exercises {
   }
 }
 
-export default new Exercises()
+export default Exercises

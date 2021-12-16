@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { observer } from 'mobx-react'
-import exercises from '../../store/exercises'
 import { Button, Grid } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import mainImage from '../../assets/startImage.png'
@@ -10,19 +9,20 @@ import { nanoid } from 'nanoid'
 import { WorkoutButton } from '../../common/StartWorkoutButton'
 import { useHistory } from 'react-router'
 import { Styles } from './MainPage.styles'
+import { stores } from '../../store/store'
 
 const MainPage = observer(() => {
   useEffect(() => {
-    if (exercises.getAllExercise().length === 0) {
-      exercises.fetchExercises()
+    if (stores.exercises.getAllExercise().length === 0) {
+      stores.exercises.fetchExercises()
     }
   }, [])
 
   const history = useHistory()
 
   const startWorkoutClickButton = () => {
-    exercises.startTimer()
-    history.push(`/exercise/:${exercises.getCurrentElement().id}`)
+    stores.exerciseSession.startTimer()
+    history.push(`/exercise/:${stores.exercises.getCurrentElement().id}`)
   }
 
   return (
@@ -49,8 +49,8 @@ const MainPage = observer(() => {
         <Grid item alignSelf={'flex-start'}>
           <MainTitle />
         </Grid>
-        {!exercises.isEmpty() ? (
-          exercises
+        {!stores.exercises.isEmpty() ? (
+          stores.exercises
             .getExercises()
             .questions.map((item) => (
               <QuestionList
@@ -64,7 +64,7 @@ const MainPage = observer(() => {
           <h2>...Loading...</h2>
         )}
         <WorkoutButton onClick={startWorkoutClickButton}>
-          {exercises.getCurrentExerciseSession().paused
+          {stores.exerciseSession.getCurrentExerciseSession().paused
             ? 'Resume'
             : 'Start Workout'}
         </WorkoutButton>

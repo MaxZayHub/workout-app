@@ -1,6 +1,6 @@
 import { Exercise } from '../../types/exercise'
 
 export interface ExerciseContentPropsInterface {
-  currentExercise: Exercise | undefined
+  currentExercise?: Exercise
   setId: (id: number) => void
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check'
 import styled from 'styled-components'
-import exercises from '../../store/exercises'
+import { stores } from '../../store/store'
 
 const SaveContinueButton = styled.button`
   width: 100%;
@@ -23,9 +23,9 @@ const WorkoutCompletedPage = () => {
   const [time, setTime] = useState<number>()
 
   useEffect(() => {
-    exercises.stopTimer()
-    setTime(Math.floor(exercises.getWorkOutTime() / 60))
-    exercises.clearTimer()
+    stores.exerciseSession.stopTimer()
+    setTime(Math.floor(stores.exerciseSession.getWorkOutTime() / 60))
+    stores.exerciseSession.clearTimer()
   }, [])
 
   return (

@@ -1,6 +1,3 @@
-export const isRemainingTimeLessThanTen = (number : number | undefined) => {
-  if (number) {
-    return number < 10
-  }
-  return false
+export const isRemainingTimeLessThanTen = (number?: number) => {
+  return number ? number < 10 : false
 }

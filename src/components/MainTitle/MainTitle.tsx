@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Typography } from '@mui/material'
-import exercises from '../../store/exercises'
 import { HeaderComponent } from '../../common/HeaderComponent'
+import { stores } from '../../store/store'
 
 const MainTitle = () => {
   return (
@@ -37,7 +37,7 @@ const MainTitle = () => {
         variant={'h5'}
         fontSize={'14px'}
       >
-        Easy &#183; {exercises.getMaxWorkoutTime()} &#183; no equipment
+        Easy &#183; {stores.exercises.getMaxWorkoutTime()} &#183; no equipment
       </Typography>
     </Grid>
   )
