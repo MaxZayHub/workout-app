@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Button } from '@mui/material'
 
 export const Styles = {
   VideoStyled: styled.video`
@@ -15,6 +16,12 @@ export const Styles = {
     @media (max-width: 375px) {
       width: 66%;
       margin-right: 0;
+    }
+  `,
+
+  SkipButton: styled(Button)`
+    && {
+      border: 2px solid;
     }
   `,
 }

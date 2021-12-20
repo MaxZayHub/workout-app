@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { FlexWrapper } from '../../common/FlexWrapper'
-import { Button, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { TimerNumber } from '../../common/TimerNumber'
 import { isRemainingTimeLessThanTen } from '../../utils/isRemainingTimeLessThanTen'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
 import { useHistory } from 'react-router'
-import PauseIcon from '@mui/icons-material/Pause'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import { HeaderComponent } from '../../common/HeaderComponent'
 import { ExerciseContentPropsInterface } from './ExerciseContent.interface'
 import { Style } from './ExerciseContent.styles'
@@ -118,14 +116,12 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
               justifyContent={'space-between'}
               alignItems={'center'}
             >
-              <Button
+              <Style.ControlButton
                 onClick={changePrevExerciseHandler}
-                variant={'outlined'}
                 color="secondary"
-                style={{ border: '2px solid' }}
               >
                 <SkipPreviousIcon />
-              </Button>
+              </Style.ControlButton>
               <CountdownCircleTimer
                 isPlaying={!pause}
                 initialRemainingTime={
@@ -143,23 +139,16 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
                   return renderTime(remainingTime)
                 }}
               </CountdownCircleTimer>
-              <Button
+              <Style.ControlButton
                 onClick={changeNextExerciseHandler}
-                variant={'outlined'}
                 color="secondary"
-                style={{ border: '2px solid' }}
               >
                 <SkipNextIcon />
-              </Button>
+              </Style.ControlButton>
             </Grid>
           </Grid>
           <Grid item width={'100%'} position={'relative'} borderRadius={'10px'}>
-            <VideoStyled
-              autoPlay={true}
-              muted={true}
-              loop={true}
-              style={{ borderRadius: '10px' }}
-            >
+            <VideoStyled autoPlay={true} muted={true} loop={true}>
               <source src={props.currentExercise?.video} />
             </VideoStyled>
             {pause && (
@@ -207,11 +196,7 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
         height={'80px'}
       >
         <Style.PauseButton onClick={clickPauseButtonHandler}>
-          {pause ? (
-            <PlayArrowIcon style={{ color: 'white' }} />
-          ) : (
-            <PauseIcon style={{ color: 'white' }} />
-          )}
+          {pause ? <Style.ButtonPlayIcon /> : <Style.ButtonPauseIcon />}
         </Style.PauseButton>
       </Grid>
     </Grid>

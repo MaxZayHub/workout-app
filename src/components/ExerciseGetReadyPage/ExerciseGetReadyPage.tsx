@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { TimerNumber } from '../../common/TimerNumber'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
@@ -50,14 +50,9 @@ const ExerciseGetReadyPage = (props: ExerciseGetReadyPropsInterface) => {
                 </TimerNumber>
               )}
             </CountdownCircleTimer>
-            <Button
-              onClick={skipWarmupHandler}
-              variant={'outlined'}
-              color="secondary"
-              style={{ border: '2px solid' }}
-            >
+            <Styles.SkipButton onClick={skipWarmupHandler} color="secondary">
               <SkipNextIcon />
-            </Button>
+            </Styles.SkipButton>
           </Styles.TimerWrapper>
         </Grid>
         <Grid item width={'100%'}>

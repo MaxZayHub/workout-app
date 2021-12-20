@@ -1,23 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check'
-import styled from 'styled-components'
 import { stores } from '../../store/store'
-
-const SaveContinueButton = styled.button`
-  width: 100%;
-  height: 48px;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  background-color: #aa00ff;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: Source Sans Pro, sans-serif;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-`
+import { Styles } from './WorkoutCompletedPage.styles'
 
 const WorkoutCompletedPage = () => {
   const [time, setTime] = useState<number>()
@@ -91,7 +76,7 @@ const WorkoutCompletedPage = () => {
           </Typography>
         </Grid>
         <Grid item width={'100%'} marginTop={'40px'}>
-          <SaveContinueButton>Save & Continue</SaveContinueButton>
+          <Styles.SaveContinueButton>Save & Continue</Styles.SaveContinueButton>
         </Grid>
       </Grid>
     </Grid>

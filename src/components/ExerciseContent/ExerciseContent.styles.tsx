@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import { Button } from '@mui/material'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import PauseIcon from '@mui/icons-material/Pause'
 
 export const Style = {
   PauseButton: styled.button`
@@ -39,5 +42,23 @@ export const Style = {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+  `,
+
+  ControlButton: styled(Button)`
+    && {
+      border: 2px solid;
+    }
+  `,
+
+  ButtonPlayIcon: styled(PlayArrowIcon)`
+    && {
+      color: white;
+    }
+  `,
+
+  ButtonPauseIcon: styled(PauseIcon)`
+    && {
+      color: white;
+    }
   `,
 }
