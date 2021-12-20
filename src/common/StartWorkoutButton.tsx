@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const WorkoutButton = styled.button`
   width: 55%;
-  background-color: #aa00ff;
+  background-color: ${(props) => props.theme.background.startButton};
   height: 56px;
   border: none;
   outline: none;

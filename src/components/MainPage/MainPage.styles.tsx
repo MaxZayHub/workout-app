@@ -27,6 +27,7 @@ export const Styles = {
     justify-content: center;
     gap: 24px;
     z-index: 1;
+    margin-bottom: 100px;
 
     @media (max-width: 375px) {
       width: 90%;

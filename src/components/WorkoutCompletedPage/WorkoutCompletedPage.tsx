@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Typography } from '@mui/material'
-import CheckIcon from '@mui/icons-material/Check'
+import { Grid } from '@mui/material'
 import { stores } from '../../store/store'
 import { Styles } from './WorkoutCompletedPage.styles'
+import { TextColor } from '../../common/TextColor'
 
 const WorkoutCompletedPage = () => {
   const [time, setTime] = useState<number>()
@@ -31,49 +31,46 @@ const WorkoutCompletedPage = () => {
         marginTop={'124px'}
       >
         <Grid item>
-          <CheckIcon color={'success'} style={{ fontSize: '76px' }} />
+          <Styles.CheckIconStyled color={'success'} />
         </Grid>
         <Grid item>
-          <Typography
+          <TextColor
             variant={'h2'}
             fontSize={'40px'}
             fontWeight={'600'}
             fontFamily={'Source Sans Pro'}
           >
             Workout completed!
-          </Typography>
+          </TextColor>
         </Grid>
         <Grid item>
-          <Typography
+          <TextColor
             variant={'h5'}
-            color={'#222222'}
             fontSize={'20px'}
             fontFamily={'Source Sans Pro'}
             fontWeight={'400'}
           >
             Nice job. You’re done. Here’s the workout summary.
-          </Typography>
+          </TextColor>
         </Grid>
         <Grid item marginTop={'32px'}>
-          <Typography
+          <TextColor
             variant={'h5'}
             fontSize={'14px'}
             fontFamily={'Source Sans Pro'}
-            color={'#212121'}
           >
             Minutes
-          </Typography>
+          </TextColor>
         </Grid>
         <Grid item marginTop={'4px'}>
-          <Typography
+          <TextColor
             variant={'h4'}
             fontSize={'40px'}
-            color={'#212121'}
             fontWeight={'600'}
             fontFamily={'Source Sans Pro'}
           >
             {time}
-          </Typography>
+          </TextColor>
         </Grid>
         <Grid item width={'100%'} marginTop={'40px'}>
           <Styles.SaveContinueButton>Save & Continue</Styles.SaveContinueButton>

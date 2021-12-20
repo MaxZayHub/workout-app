@@ -1,7 +1,8 @@
 import React from 'react'
 import { Exercise } from '../../types/exercise'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import { HeaderComponent } from '../../common/HeaderComponent'
+import { TextColor } from '../../common/TextColor'
 
 const ExerciseCard = (props: Exercise) => {
   return (
@@ -11,7 +12,7 @@ const ExerciseCard = (props: Exercise) => {
       justifyContent={'start'}
       gap={'8px'}
       flexDirection={'row'}
-      bgcolor={props.completed ? '#b1fdc8' : 'transparent'}
+      bgcolor={props.completed ? '#53f683' : 'transparent'}
     >
       <img src={props.photo} width={64} height={64} alt={'exercise'} />
       <Grid
@@ -29,14 +30,14 @@ const ExerciseCard = (props: Exercise) => {
         >
           {props.title}
         </HeaderComponent>
-        <Typography
+        <TextColor
           variant={'h5'}
           fontSize={'14px'}
           fontFamily={'Source Sans Pro'}
           fontWeight={'400'}
         >
           {props.duration} sec
-        </Typography>
+        </TextColor>
       </Grid>
     </Grid>
   )

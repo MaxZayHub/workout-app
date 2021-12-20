@@ -1,7 +1,8 @@
 import React from 'react'
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import { HeaderComponent } from '../../common/HeaderComponent'
 import { stores } from '../../store/store'
+import { TextColor } from '../../common/TextColor'
 
 const MainTitle = () => {
   return (
@@ -12,7 +13,7 @@ const MainTitle = () => {
       justifyContent={'space-around'}
       gap={'4px'}
     >
-      <Typography
+      <TextColor
         alignSelf={'flex-start'}
         fontFamily={'Source Sans Pro'}
         fontWeight={'400'}
@@ -20,7 +21,7 @@ const MainTitle = () => {
         fontSize={'14px'}
       >
         Day1
-      </Typography>
+      </TextColor>
       <HeaderComponent
         alignSelf={'flex-start'}
         fontMedia={'20px'}
@@ -30,7 +31,7 @@ const MainTitle = () => {
       >
         Morning Flexibility Routine
       </HeaderComponent>
-      <Typography
+      <TextColor
         alignSelf={'flex-start'}
         fontFamily={'Source Sans Pro'}
         fontWeight={'400'}
@@ -38,7 +39,7 @@ const MainTitle = () => {
         fontSize={'14px'}
       >
         Easy &#183; {stores.exercises.getMaxWorkoutTime()} &#183; no equipment
-      </Typography>
+      </TextColor>
     </Grid>
   )
 }

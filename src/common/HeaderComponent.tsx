@@ -13,11 +13,12 @@ export const HeaderComponent =
   styled.h3 <
   Props >
   `
-  align-self: ${(props) => props.alignSelf};
-  font-family: ${(props) => props.fontFamily};
-  font-weight: ${(props) => props.fontWeight};
-  font-size: ${(props) => props.fontSize};
-  margin: 0;
+    align-self: ${(props) => props.alignSelf};
+    font-family: ${(props) => props.fontFamily};
+    font-weight: ${(props) => props.fontWeight};
+    font-size: ${(props) => props.fontSize};
+    color: ${(props) => props.theme.colors.title};
+    margin: 0;
     text-align: ${(props) => props.textAlign};
 
   @media (max-width: 375px) {
