@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Button, Grid } from '@mui/material'
 import { TextColor } from '../../common/TextColor'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export const Styles = {
   VideoStyled: styled.video`
@@ -54,4 +55,10 @@ export const Styles = {
       width: 100%;
     }
   `,
+
+  Timer: styled(CountdownCircleTimer).attrs((props) => ({
+    colors: [[props.theme.background.getReadyTimer, 1]],
+    duration: 5,
+    size: 128,
+  }))``,
 }

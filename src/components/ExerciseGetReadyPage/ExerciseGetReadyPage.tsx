@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { TimerNumber } from '../../common/TimerNumber'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
 import { FlexWrapper } from '../../common/FlexWrapper'
@@ -19,13 +18,7 @@ const ExerciseGetReadyPage = (props: ExerciseGetReadyPropsInterface) => {
         <Styles.PageTitle>Get Ready</Styles.PageTitle>
         <Grid container justifyContent={'end'}>
           <Styles.TimerWrapper>
-            <CountdownCircleTimer
-              isPlaying
-              duration={5}
-              colors={[['#1de9b6', 1]]}
-              onComplete={skipWarmupHandler}
-              size={128}
-            >
+            <Styles.Timer isPlaying onComplete={skipWarmupHandler}>
               {({ remainingTime }) => (
                 <TimerNumber>
                   {isRemainingTimeLessThanTen(remainingTime)
@@ -33,7 +26,7 @@ const ExerciseGetReadyPage = (props: ExerciseGetReadyPropsInterface) => {
                     : remainingTime}
                 </TimerNumber>
               )}
-            </CountdownCircleTimer>
+            </Styles.Timer>
             <Styles.SkipButton onClick={skipWarmupHandler}>
               <SkipNextIcon />
             </Styles.SkipButton>

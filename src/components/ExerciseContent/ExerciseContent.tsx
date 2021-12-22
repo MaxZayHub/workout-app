@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FlexWrapper } from '../../common/FlexWrapper'
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { TimerNumber } from '../../common/TimerNumber'
 import { isRemainingTimeLessThanTen } from '../../utils/isRemainingTimeLessThanTen'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
@@ -95,7 +94,7 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
               <Styles.ControlButton onClick={changePrevExerciseHandler}>
                 <SkipPreviousIcon />
               </Styles.ControlButton>
-              <CountdownCircleTimer
+              <Styles.Timer
                 isPlaying={!pause}
                 initialRemainingTime={
                   currentExerciseSession.paused
@@ -103,15 +102,13 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
                     : props.currentExercise.duration
                 }
                 duration={props.currentExercise.duration}
-                colors={[['#ff4081', 1]]}
                 onComplete={changeNextExerciseHandler}
-                size={128}
               >
                 {({ remainingTime }) => {
                   duration = remainingTime
                   return renderTime(remainingTime)
                 }}
-              </CountdownCircleTimer>
+              </Styles.Timer>
               <Styles.ControlButton onClick={changeNextExerciseHandler}>
                 <SkipNextIcon />
               </Styles.ControlButton>

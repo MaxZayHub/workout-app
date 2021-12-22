@@ -3,6 +3,7 @@ import { Button, Grid, Typography } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import PauseIcon from '@mui/icons-material/Pause'
 import { TextColor } from '../../common/TextColor'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export const Styles = {
   PauseButton: styled.button`
@@ -144,4 +145,9 @@ export const Styles = {
       border-top: 8px solid ${(props) => props.theme.colors.lineBorder};
     }
   `,
+
+  Timer: styled(CountdownCircleTimer).attrs((props) => ({
+    colors: [[props.theme.background.exerciseTimer, 1]],
+    size: 128,
+  }))``,
 }
