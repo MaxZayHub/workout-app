@@ -5,7 +5,6 @@ import { TimerNumber } from '../../common/TimerNumber'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
 import { FlexWrapper } from '../../common/FlexWrapper'
 import { isRemainingTimeLessThanTen } from '../../utils/isRemainingTimeLessThanTen'
-import { HeaderComponent } from '../../common/HeaderComponent'
 import { ExerciseGetReadyPropsInterface } from './ExerciseGetReadyPage.interface'
 import { Styles } from './ExerciseGetReadyPage.styles'
 
@@ -15,24 +14,9 @@ const ExerciseGetReadyPage = (props: ExerciseGetReadyPropsInterface) => {
   }
 
   return (
-    <Grid
-      container
-      width={'100%'}
-      minHeight={'100vh'}
-      justifyContent={'start'}
-      alignItems={'center'}
-      flexDirection={'column'}
-      gap={'32px'}
-    >
+    <Styles.PageWrapper container>
       <FlexWrapper>
-        <HeaderComponent
-          fontMedia={'20px'}
-          fontWeight={'600'}
-          fontSize={'24px'}
-          fontFamily={'Source Sans Pro'}
-        >
-          Get Ready
-        </HeaderComponent>
+        <Styles.PageTitle>Get Ready</Styles.PageTitle>
         <Grid container justifyContent={'end'}>
           <Styles.TimerWrapper>
             <CountdownCircleTimer
@@ -50,18 +34,18 @@ const ExerciseGetReadyPage = (props: ExerciseGetReadyPropsInterface) => {
                 </TimerNumber>
               )}
             </CountdownCircleTimer>
-            <Styles.SkipButton onClick={skipWarmupHandler} color="secondary">
+            <Styles.SkipButton onClick={skipWarmupHandler}>
               <SkipNextIcon />
             </Styles.SkipButton>
           </Styles.TimerWrapper>
         </Grid>
-        <Grid item width={'100%'}>
+        <Styles.VideoWrapper item>
           <Styles.VideoStyled autoPlay={true} muted={true} loop={true}>
             <source src={props.currentExercise?.video} />
           </Styles.VideoStyled>
-        </Grid>
+        </Styles.VideoWrapper>
       </FlexWrapper>
-    </Grid>
+    </Styles.PageWrapper>
   )
 }
 

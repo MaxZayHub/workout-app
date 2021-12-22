@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Grid } from '@mui/material'
 import { stores } from '../../store/store'
 import { Styles } from './WorkoutCompletedPage.styles'
-import { TextColor } from '../../common/TextColor'
 
 const WorkoutCompletedPage = () => {
   const [time, setTime] = useState<number>()
@@ -14,69 +13,30 @@ const WorkoutCompletedPage = () => {
   }, [])
 
   return (
-    <Grid
-      container
-      width={'100%'}
-      minHeight={'100vh'}
-      alignItems={'center'}
-      justifyContent={'start'}
-      flexDirection={'column'}
-    >
-      <Grid
-        container
-        width={'55%'}
-        alignItems={'center'}
-        justifyContent={'start'}
-        flexDirection={'column'}
-        marginTop={'124px'}
-      >
+    <Styles.PageWrapper container>
+      <Styles.ContentWrapper container>
         <Grid item>
           <Styles.CheckIconStyled color={'success'} />
         </Grid>
         <Grid item>
-          <TextColor
-            variant={'h2'}
-            fontSize={'40px'}
-            fontWeight={'600'}
-            fontFamily={'Source Sans Pro'}
-          >
-            Workout completed!
-          </TextColor>
+          <Styles.TitleText variant={'h2'}>Workout completed!</Styles.TitleText>
         </Grid>
         <Grid item>
-          <TextColor
-            variant={'h5'}
-            fontSize={'20px'}
-            fontFamily={'Source Sans Pro'}
-            fontWeight={'400'}
-          >
+          <Styles.MessageText variant={'h5'}>
             Nice job. You’re done. Here’s the workout summary.
-          </TextColor>
+          </Styles.MessageText>
         </Grid>
-        <Grid item marginTop={'32px'}>
-          <TextColor
-            variant={'h5'}
-            fontSize={'14px'}
-            fontFamily={'Source Sans Pro'}
-          >
-            Minutes
-          </TextColor>
-        </Grid>
-        <Grid item marginTop={'4px'}>
-          <TextColor
-            variant={'h4'}
-            fontSize={'40px'}
-            fontWeight={'600'}
-            fontFamily={'Source Sans Pro'}
-          >
-            {time}
-          </TextColor>
-        </Grid>
-        <Grid item width={'100%'} marginTop={'40px'}>
+        <Styles.TimeWrapper item>
+          <Styles.Minutes variant={'h5'}>Minutes</Styles.Minutes>
+        </Styles.TimeWrapper>
+        <Styles.MinutesWrapper item>
+          <Styles.MinutesText variant={'h4'}>{time}</Styles.MinutesText>
+        </Styles.MinutesWrapper>
+        <Styles.ButtonWrapper item>
           <Styles.SaveContinueButton>Save & Continue</Styles.SaveContinueButton>
-        </Grid>
-      </Grid>
-    </Grid>
+        </Styles.ButtonWrapper>
+      </Styles.ContentWrapper>
+    </Styles.PageWrapper>
   )
 }
 

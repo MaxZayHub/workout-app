@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Button } from '@mui/material'
+import { Button, Grid } from '@mui/material'
+import { TextColor } from '../../common/TextColor'
 
 export const Styles = {
   VideoStyled: styled.video`
@@ -22,6 +23,35 @@ export const Styles = {
   SkipButton: styled(Button)`
     && {
       border: 2px solid;
+      color: ${(props) => props.theme.background.controlButtons};
+    }
+  `,
+
+  PageWrapper: styled(Grid)`
+    && {
+      width: 100%;
+      min-height: 100vh;
+      justify-content: start;
+      align-items: center;
+      flex-direction: column;
+      gap: 32px;
+    }
+  `,
+
+  PageTitle: styled(TextColor)`
+    && {
+      font-weight: 600;
+      font-size: 24px;
+
+      @media (max-width: 375px) {
+        font-size: 20px;
+      }
+    }
+  `,
+
+  VideoWrapper: styled(Grid)`
+    && {
+      width: 100%;
     }
   `,
 }

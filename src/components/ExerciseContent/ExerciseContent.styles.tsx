@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { Button } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import PauseIcon from '@mui/icons-material/Pause'
+import { TextColor } from '../../common/TextColor'
 
-export const Style = {
+export const Styles = {
   PauseButton: styled.button`
     width: 53px;
     height: 53px;
@@ -11,7 +12,7 @@ export const Style = {
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: #aa00ff;
+    background-color: ${(props) => props.theme.background.controlButtons}; ;
   `,
 
   PausedBlock: styled.div`
@@ -47,6 +48,7 @@ export const Style = {
   ControlButton: styled(Button)`
     && {
       border: 2px solid;
+      color: ${(props) => props.theme.background.controlButtons};
     }
   `,
 
@@ -59,6 +61,87 @@ export const Style = {
   ButtonPauseIcon: styled(PauseIcon)`
     && {
       color: white;
+    }
+  `,
+
+  PageWrapper: styled(Grid)`
+    && {
+      width: 100%;
+      min-height: 100vh;
+      justify-content: start;
+      align-items: center;
+      flex-direction: column;
+      gap: 32px;
+      tab-index: 0;
+    }
+  `,
+
+  GetReadyTitle: styled(TextColor)`
+    && {
+      font-weight: 600;
+      font-size: 24px;
+
+      @media (max-width: 375px) {
+        font-size: 20px;
+      }
+    }
+  `,
+
+  ContentWrapper: styled(Grid)`
+    && {
+      justify-content: space-between;
+    }
+  `,
+
+  TimerContent: styled(Grid)`
+    && {
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+  `,
+
+  VideoWrapper: styled(Grid)`
+    && {
+      width: 100%;
+      position: relative;
+      border-radius: 10px;
+    }
+  `,
+
+  PausedBlockTitle: styled(Typography)`
+    && {
+      font-size: 24px;
+      color: white;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+  `,
+
+  PausedBlockText: styled(Typography)`
+    && {
+      font-size: 16px;
+      color: white;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+  `,
+
+  LeaveWorkoutButtonText: styled(Typography)`
+    && {
+      font-size: 24px;
+      color: white;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+  `,
+
+  PauseWrapper: styled(Grid)`
+    && {
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+      border-top: 8px solid ${(props) => props.theme.colors.lineBorder};
     }
   `,
 }

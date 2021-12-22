@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { observer } from 'mobx-react'
-import { Button, Grid } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Button } from '@mui/material'
 import mainImage from '../../assets/startImage.png'
 import MainTitle from '../MainTitle/MainTitle'
 import QuestionList from '../QuestionsList/QuestionList'
@@ -26,29 +25,21 @@ const MainPage = observer(() => {
   }
 
   return (
-    <Grid
-      container
-      width={'100%'}
-      height={'100%'}
-      alignItems={'center'}
-      justifyContent={'center'}
-      marginBottom={'100px'}
-      flexDirection={'column'}
-    >
+    <Styles.PageWrapper container>
       <Styles.FlexWrapper>
-        <Grid item alignSelf={'flex-start'}>
+        <Styles.ArrowWrapper item>
           <Button size={'small'}>
-            <ArrowBackIcon />
+            <Styles.ArrowBackIconStyled />
           </Button>
-        </Grid>
-        <Grid item alignSelf={'flex-start'}>
+        </Styles.ArrowWrapper>
+        <Styles.ImageWrapper item>
           <Styles.MainImage src={mainImage} alt={'main'} />
-        </Grid>
+        </Styles.ImageWrapper>
       </Styles.FlexWrapper>
       <Styles.ContentWrapper>
-        <Grid item alignSelf={'flex-start'}>
+        <Styles.TitleWrapper item>
           <MainTitle />
-        </Grid>
+        </Styles.TitleWrapper>
         {!stores.exercises.isEmpty() ? (
           stores.exercises
             .getExercises()
@@ -69,7 +60,7 @@ const MainPage = observer(() => {
             : 'Start Workout'}
         </WorkoutButton>
       </Styles.ContentWrapper>
-    </Grid>
+    </Styles.PageWrapper>
   )
 })
 

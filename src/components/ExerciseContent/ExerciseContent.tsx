@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import { FlexWrapper } from '../../common/FlexWrapper'
-import { Grid, Typography } from '@mui/material'
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { TimerNumber } from '../../common/TimerNumber'
 import { isRemainingTimeLessThanTen } from '../../utils/isRemainingTimeLessThanTen'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
 import { useHistory } from 'react-router'
-import { HeaderComponent } from '../../common/HeaderComponent'
 import { ExerciseContentPropsInterface } from './ExerciseContent.interface'
-import { Style } from './ExerciseContent.styles'
+import { Styles } from './ExerciseContent.styles'
 import { VideoStyled } from '../../common/VideoStyled'
 import { stores } from '../../store/store'
 
@@ -88,40 +86,15 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
   }
 
   return (
-    <Grid
-      container
-      onKeyUp={onSpaceClickHandler}
-      tabIndex={0}
-      width={'100%'}
-      minHeight={'100vh'}
-      justifyContent={'start'}
-      alignItems={'center'}
-      flexDirection={'column'}
-      gap={'32px'}
-    >
+    <Styles.PageWrapper container onKeyUp={onSpaceClickHandler}>
       {props.currentExercise && (
         <FlexWrapper>
-          <HeaderComponent
-            fontMedia={'20px'}
-            fontWeight={'600'}
-            fontSize={'24px'}
-            fontFamily={'Source Sans Pro'}
-          >
-            Get Ready
-          </HeaderComponent>
-          <Grid container justifyContent={'space-between'}>
-            <Grid
-              container
-              width={'100%'}
-              justifyContent={'space-between'}
-              alignItems={'center'}
-            >
-              <Style.ControlButton
-                onClick={changePrevExerciseHandler}
-                color="secondary"
-              >
+          <Styles.GetReadyTitle>Get Ready</Styles.GetReadyTitle>
+          <Styles.ContentWrapper container>
+            <Styles.TimerContent container>
+              <Styles.ControlButton onClick={changePrevExerciseHandler}>
                 <SkipPreviousIcon />
-              </Style.ControlButton>
+              </Styles.ControlButton>
               <CountdownCircleTimer
                 isPlaying={!pause}
                 initialRemainingTime={
@@ -139,67 +112,41 @@ const ExerciseContent = (props: ExerciseContentPropsInterface) => {
                   return renderTime(remainingTime)
                 }}
               </CountdownCircleTimer>
-              <Style.ControlButton
-                onClick={changeNextExerciseHandler}
-                color="secondary"
-              >
+              <Styles.ControlButton onClick={changeNextExerciseHandler}>
                 <SkipNextIcon />
-              </Style.ControlButton>
-            </Grid>
-          </Grid>
-          <Grid item width={'100%'} position={'relative'} borderRadius={'10px'}>
+              </Styles.ControlButton>
+            </Styles.TimerContent>
+          </Styles.ContentWrapper>
+          <Styles.VideoWrapper item>
             <VideoStyled autoPlay={true} muted={true} loop={true}>
               <source src={props.currentExercise?.video} />
             </VideoStyled>
             {pause && (
-              <Style.PausedBlock>
-                <Typography
-                  variant={'h3'}
-                  fontFamily={'Source Sans Pro'}
-                  color={'white'}
-                  fontSize={'24px'}
-                >
+              <Styles.PausedBlock>
+                <Styles.PausedBlockTitle variant={'h3'}>
                   Workout paused
-                </Typography>
-                <Typography
-                  variant={'h3'}
-                  fontFamily={'Source Sans Pro'}
-                  color={'white'}
-                  fontSize={'16px'}
-                >
+                </Styles.PausedBlockTitle>
+                <Styles.PausedBlockText variant={'h3'}>
                   Press "Play button" or "Space bar" to continue
-                </Typography>
-                <Style.LeaveWorkoutButton
+                </Styles.PausedBlockText>
+                <Styles.LeaveWorkoutButton
                   onClick={leaveWorkoutClickButtonHandler}
                 >
-                  <Typography
-                    variant={'h4'}
-                    fontFamily={'Source Sans Pro'}
-                    fontSize={'24px'}
-                  >
+                  <Styles.LeaveWorkoutButtonText variant={'h4'}>
                     Leave workout
-                  </Typography>
-                </Style.LeaveWorkoutButton>
-              </Style.PausedBlock>
+                  </Styles.LeaveWorkoutButtonText>
+                </Styles.LeaveWorkoutButton>
+              </Styles.PausedBlock>
             )}
-          </Grid>
+          </Styles.VideoWrapper>
         </FlexWrapper>
       )}
-      <Grid
-        container
-        alignItems={'center'}
-        justifyContent={'center'}
-        position={'absolute'}
-        bottom={'0px'}
-        borderTop={'8px solid #eeeeee'}
-        width={'100%'}
-        height={'80px'}
-      >
-        <Style.PauseButton onClick={clickPauseButtonHandler}>
-          {pause ? <Style.ButtonPlayIcon /> : <Style.ButtonPauseIcon />}
-        </Style.PauseButton>
-      </Grid>
-    </Grid>
+      <Styles.PauseWrapper container>
+        <Styles.PauseButton onClick={clickPauseButtonHandler}>
+          {pause ? <Styles.ButtonPlayIcon /> : <Styles.ButtonPauseIcon />}
+        </Styles.PauseButton>
+      </Styles.PauseWrapper>
+    </Styles.PageWrapper>
   )
 }
 

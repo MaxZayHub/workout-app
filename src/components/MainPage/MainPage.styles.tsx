@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Grid } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 export const Styles = {
   MainImage: styled.img`
@@ -19,6 +21,12 @@ export const Styles = {
     }
   `,
 
+  ArrowBackIconStyled: styled(ArrowBackIcon)`
+    && {
+      color: ${(props) => props.theme.background.controlButtons};
+    }
+  `,
+
   ContentWrapper: styled.div`
     display: flex;
     width: 55%;
@@ -32,6 +40,35 @@ export const Styles = {
     @media (max-width: 375px) {
       width: 90%;
       padding: 16px;
+    }
+  `,
+
+  PageWrapper: styled(Grid)`
+    && {
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 100px;
+      flex-direction: column;
+    }
+  `,
+
+  ArrowWrapper: styled(Grid)`
+    && {
+      align-self: flex-start;
+    }
+  `,
+
+  ImageWrapper: styled(Grid)`
+    && {
+      align-self: flex-start;
+    }
+  `,
+
+  TitleWrapper: styled(Grid)`
+    && {
+      align-self: flex-start;
     }
   `,
 }
