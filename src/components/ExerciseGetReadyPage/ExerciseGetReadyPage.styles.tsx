@@ -56,8 +56,8 @@ export const Styles = {
     }
   `,
 
-  Timer: styled(CountdownCircleTimer).attrs((props) => ({
-    colors: [[props.theme.background.getReadyTimer, 1]],
+  Timer: styled(CountdownCircleTimer).attrs(({ theme }) => ({
+    colors: [[theme.background.getReadyTimer, 1]],
     duration: 5,
     size: 128,
   }))``,
