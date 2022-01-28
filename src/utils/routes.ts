@@ -1,11 +1,10 @@
-import {
-  COMPLETE_ROUTE,
-  EXERCISE_ROUTE,
-  MAIN_ROUTE,
-} from '../consts/routeConsts'
 import MainPage from '../components/MainPage/MainPage'
 import WorkoutCompletedPage from '../components/WorkoutCompletedPage/WorkoutCompletedPage'
 import ExercisePage from '../components/ExercisePage/ExercisePage'
+
+const MAIN_ROUTE = '/main'
+const COMPLETE_ROUTE = '/complete'
+const EXERCISE_ROUTE = '/exercise/:id'
 
 export const routes = [
   {
